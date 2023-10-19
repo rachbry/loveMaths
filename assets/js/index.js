@@ -16,6 +16,13 @@ document.addEventListener("DOMContentLoaded", function() {
          })
     }
 
+    // If enter key is pressed then answer submitted
+    document.getElementById("answer-box").addEventListener("keydown", function(event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    })
+
     runGame("addition");
 
 })
@@ -24,6 +31,10 @@ document.addEventListener("DOMContentLoaded", function() {
  * and after the user's answer has been processed
  */
 function runGame(gameType) {
+// Clears the answer box every time function is loaded
+    document.getElementById("answer-box").value = "";
+    // Puts cursor in the answer box
+    document.getElementById("answer-box").focus();
 
     // Creates 2 random numbers between 1 and 25
     let num1 = Math.floor(Math.random() * 25) + 1;
@@ -59,13 +70,21 @@ function checkAnswer() {
     let userAnswer = parseInt(document.getElementById('answer-box').value);
     let calculatedAnswer = calculateCorrectAnswer();
     let isCorrect = userAnswer === calculatedAnswer[0];
+    
 
     if (isCorrect) {
-        alert("Well done you got it right!");
+        let answerMessage="Well done you got it right!"
+        document.getElementById("answer-message").innerHTML = answerMessage;
         incrementScore();
+
+        tickOrCross='<i class="fa-solid fa-check" style="color: #11ff00;">';
+        document.getElementById("tick-or-cross").innerHTML = tickOrCross;
     } else {
-        alert(`Awww... you answered ${userAnswer}.  The correct answer is ${calculatedAnswer[0]}`);
+        let answerMessage=(`Awww... you answered ${userAnswer}.  The correct answer is ${calculatedAnswer[0]}`)
+        document.getElementById("answer-message").innerHTML = answerMessage;
         incrementWrongAnswer();
+        tickOrCross='<i class="fa-solid fa-x" style="color: #ff0000;">';
+        document.getElementById("tick-or-cross").innerHTML = tickOrCross;
     }
 }
 
@@ -137,7 +156,7 @@ function displayMultiplyQuestion(operand1, operand2) {
 }
 
 function displayDivideQuestion(operand1, operand2) {
-    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand1').textContent = (operand1 * operand2);
     document.getElementById('operand2').textContent = operand2;
     document.getElementById('operator').textContent = "/";
 }

@@ -67,7 +67,7 @@ body {
 
 .answer-message {
     display: none;
-    font-size: 1rem;
+    font-size: 0.5rem;
 }
 
 #answer-box {
@@ -207,6 +207,10 @@ body {
 
     .answer-message {
         display: block;
+    }
+
+    #answer-message {
+        font-size: 0.5rem;
     }
 
     #answer-box {
